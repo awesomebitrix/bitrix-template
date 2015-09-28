@@ -1,2 +1,242 @@
 @import "reset.scss";
 @import "main.scss";
+
+
+
+/**
+***************************************************************
+* =CALLBACK
+***************************************************************
+**/
+
+.callback-form-wrapper {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 600;
+  background: rgba(0,0,0, .3);
+}
+
+.callback-form-container {
+  box-shadow: 0px 0px 22px 10px rgba(0,0,0, .3);
+  background: #fff;
+  width: 420px;
+  height: auto;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  margin-left: -210px;
+  padding: 15px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #e2e5e7;
+}
+
+.callback-header {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e3e3e3;
+  padding-bottom: 14px;
+}
+
+.callback__title {
+  text-align: center;
+}
+
+.callback {
+  position: relative;
+}
+
+.callback__close {
+  cursor: pointer;
+  position: absolute;
+  top: -10px;
+  right: -9px;
+  color: #333;
+  font-size: 18px;
+}
+
+.callback-list__item {
+  margin-bottom: 3px;
+}
+
+.callback-list__label {
+  display: inline-block;
+  font-size: .9em;
+  color: #333;
+}
+
+.callback-list__label span {
+  color: #d12c2c;
+  font-size: 22px;
+  display: inline-block;
+  margin-left: 2px;
+}
+
+.callback-list__input {
+  width: 100%;
+  height: 25px;
+  padding-left: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #c9ced2;
+}
+
+.callback-list_textarea {
+  width: 100%;
+  height: 80px;
+  padding-left: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #c9ced2;
+}
+
+.callback-list__important {
+  margin-bottom: 5px;
+  font-size: .8em;
+  color: #333;
+}
+
+.callback-list__important span {
+  color: #d12c2c;
+  font-size: 22px;
+  display: inline-block;
+}
+
+.callback__submit {
+  float: right;
+  background: none;
+  border: 1px solid #e3e3e3;
+  padding: 10px 15px;
+}
+
+.callback__submit:hover {
+  background: #f4f4f4;
+}
+
+.callback__error {
+  color: #d12c2c;
+  font-size: 15px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+/* Captcha */
+.captcha {
+  overflow: hidden;
+}
+
+.captcha__desc {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.captcha-img-container {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.captcha__img {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.captcha__refresh {
+  font-size: .9em;
+  text-decoration: underline;
+}
+
+.captcha__input {
+  width: 136px;
+  height: 25px;
+  float: right;
+  padding-left: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #c9ced2;
+}
+
+
+/* Confirm order */
+.confirm-order {
+  box-shadow: 0px 0px 22px 10px rgba(0,0,0, .3);
+  display: none;
+  padding: 15px;
+  padding: 15px;
+  width: 294px;
+  height: 90px;
+  margin: -70px 0 0 -160px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #e3e3e3;
+  z-index: 1100;
+}
+
+.confirm-order__message {
+  color: #000;
+  margin-bottom: 10px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 20px;
+
+}
+
+.confirm-order__btn {
+  outline: none;
+  background: none;
+  border: 1px solid #e3e3e3;
+  padding: 5px 23px;
+  margin-left: 100px;
+  cursor: pointer;
+  color:#333;
+}
+
+.confirm-order__btn:hover {
+  background: #f4f4f4;
+}
+
+.confirm-order__btn:after {
+  display: none;
+}
+
+.confirm-order__btn:hover {
+  background: #ff7800;
+  color: #fff;
+}
+
+
+@media screen and (max-width: 458px) {
+  .callback-form-container {
+    width: 320px;
+    margin-left: -160px;
+  }
+}
+
+@media screen and (max-width: 358px) {
+  .callback-form-container {
+    width: 290px;
+     margin-left: -145px;
+  }
+}

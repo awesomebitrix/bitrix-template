@@ -39,5 +39,58 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae facere solut
 	<script src='js/libs/jquery.bxslider.min.js'></script>
 	<script src='js/common.js'></script>
 	<!-- <script src="js/build/global.min.js"></script> -->
+
+
+	<!-- CALLBACK -->
+	<div class="callback-form-wrapper">
+		<div class="callback-form-container">
+			<form class="callback" action="<?=SITE_TEMPLATE_PATH?>/callback.php" method="POST">
+			<header class="callback-header">
+				<h3 class="callback__title">Обратный звонок</h3>
+			</header>
+				<ul class="callback-list">
+					<li class="callback-list__item">
+						<label class="callback-list__label" for="callback-name">Ф.И.О<span>*</span></label>
+						<input type="text" class="callback-list__input" id="callback-name" name="callback-name">
+					</li>
+					<li class="callback-list__item">
+						<label class="callback-list__label" for="callback-phone">Телефон<span>*</span></label>
+						<input type="text" class="callback-list__input" id="callback-phone" name="callback-phone">
+					</li>
+					<li class="callback-list__item">
+						<label class="callback-list__label" for="callback-email">E-mail<span>*</span></label>
+						<input type="email" class="callback-list__input" name="callback-email" id="callback-email">
+					</li>
+					<li class="callback-list__item">
+						<label class="callback-list__label" for="callback-comment">Комментарий</label>
+						<textarea name="callback-comment" class="callback-list_textarea" id="callback-comment"></textarea>
+					</li>
+					<li class="callback-list__item">
+						<p class="callback-list__important"><span>*</span> Поля, обязательные для заполнения</p>
+					</li>
+				</ul>
+				<span class="callback__error"><?=$status?></span>
+				<div class="captcha">
+				<p class="captcha__desc">Введите код указанный на картинке</p>
+					<div class="captcha-img-container">
+						<img class="captcha__img" src="<?=SITE_TEMPLATE_PATH?>/qucikCapthca/imagebuilder.php" border="1">
+						<a href="#" class="captcha__refresh">
+							<i class=" fa fa-refresh"></i>
+							Перезагрузить
+						</a>
+					</div>
+					<input class="captcha__input" MAXLENGTH=8 SIZE=8 name="userstring" type="text" value="">
+				</div>
+
+				<input class="callback__submit" type="submit" value="Отправить">
+				<i class="callback__close fa fa-times"></i>
+			</form>
+		</div>
+	</div>
+
+	<div class="confirm-order">
+		<p class="confirm-order__message">Ваше обращение отправлено.</p>
+		<button class="confirm-order__btn">Ok</button>
+	</div>
 </body>
 </html>
