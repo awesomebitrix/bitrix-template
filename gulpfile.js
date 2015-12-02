@@ -1,25 +1,36 @@
-var gulp = require('gulp'),
-	postcss = require('gulp-postcss'),
-	sass = require('gulp-sass'),
-	autoprefixer = require('autoprefixer'),
-	spritesmith = require('gulp.spritesmith'),
-	browserSync = require('browser-sync').create(),
-	merge = require('merge-stream');
+var gulp         = require('gulp'),
+  postcss      = require('gulp-postcss'),
+  sass         = require('gulp-sass'),
+  autoprefixer = require('autoprefixer'),
+  browserSync  = require('browser-sync').create(),
+  selectors    = require('postcss-custom-selectors'),
+  spritesmith  = require('gulp.spritesmith'),
+  plumber      = require('gulp-plumber'),
+  merge        = require('merge-stream');
 
-// Sass
+/*------------------------------------*\
+    Sass
+\*------------------------------------*/
+
 gulp.task('sass', function() {
-	var processors = [
-	       autoprefixer({ browsers: ['last 20 versions'] }),
-	       require('postcss-font-magician')({}),
-	   ];
+  var processors = [
+    autoprefixer({ browsers: ['last 20 versions'] }),
+    require('postcss-font-magician')({}),
+     selectors,
+  ];
 
-	return gulp.src('sass/style.scss')
-		.pipe(sass())
-		.pipe(postcss(processors))
-		.pipe(gulp.dest('css/'));
+  return gulp.src('sass/style.scss')
+    .pipe(plumber())
+    //.pipe(sass().on('error', error))
+    .pipe(postcss(processors))
+    .pipe(gulp.dest('css/'));
 });
 
-// Sprites
+
+/*------------------------------------*\
+    Sprites
+\*------------------------------------*/
+
 gulp.task('sprite', function () {
   var spriteData = gulp.src('images/main/*.png').pipe(spritesmith({
     imgName: 'sprite.png',
@@ -28,36 +39,54 @@ gulp.task('sprite', function () {
   }));
 
   var imgStream = spriteData.img
-     .pipe(gulp.dest('images/'));
+    .pipe(gulp.dest('images/'));
 
-   var cssStream = spriteData.css
-     .pipe(gulp.dest('css/'));
+  var cssStream = spriteData.css
+    .pipe(gulp.dest('css/'));
 
-   return merge(imgStream, cssStream);
+  return merge(imgStream, cssStream);
   // return spriteData.pipe(gulp.dest('css/'));
 });
 
+/*------------------------------------*\
+    Borwsersync server
+\*------------------------------------*/
 
 gulp.task('serve', ['sass'], function() {
+  browserSync.init({
+    server: ""
+  });
 
-    browserSync.init({
-        server: ""
-    });
-
-    // gulp.watch("/sass/*.scss", { interval: 500 }, ['sass']);
-    gulp.watch("css/style.css").on('change', browserSync.reload);
-    gulp.watch("index.html").on('change', browserSync.reload);
+  // gulp.watch("/sass/*.scss", { interval: 500 }, ['sass']);
+  gulp.watch("css/style.css").on('change', browserSync.reload);
+  gulp.watch("index.html").on('change', browserSync.reload);
 });
 
-// Watch
+/*------------------------------------*\
+    Watch
+\*------------------------------------*/
+
 gulp.task('watch', function() {
-	gulp.watch('sass/style.scss', { interval: 500 }, ['sass']);
-	gulp.watch('images/main/*.png', { interval: 500 }, ['sprite']);
+  gulp.watch('sass/**/*.scss', { interval: 500 }, ['sass']);
+  // gulp.watch('images/main/*.png', { interval: 500 }, ['sprite']);
 });
 
-// Default task
-gulp.task('default', ['sass', 'sprite', 'watch']);
+/*------------------------------------*\
+    Run default gulp tasks
+\*------------------------------------*/
+
+gulp.task('default', ['sass', 'watch']);
 
 
+/**
+***************************************************************
+* =FUNCTIONS
+***************************************************************
+**/
 
+// function like a plumber js
+function error(error) {
+  console.log(error.toString());
+  this.emit('end');
+}
 
