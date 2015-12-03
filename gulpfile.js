@@ -22,6 +22,7 @@ gulp.task('sass', function() {
   return gulp.src('sass/style.scss')
     .pipe(plumber())
     //.pipe(sass().on('error', error))
+    .pipe(sass({outputStyle: 'compressed'}))
     .pipe(postcss(processors))
     .pipe(gulp.dest('css/'));
 });
