@@ -5,12 +5,12 @@
 	$mail_template = "ORDER_CALLBACK";
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		$name         = trim($_POST['callback-name']);
-		$phone        = trim($_POST['callback-phone']);
-		$email        = trim($_POST['callback-email']);
-		$comment      = trim($_POST['callback-comment']);
+		$name         = trim($_POST['name']);
+		// $phone        = trim($_POST['phone']);
+		$email        = trim($_POST['email']);
+		$comment      = trim($_POST['message']);
 
-		if ( ($name === '') || ($phone === '') || ($email === '') ) {
+		if ( ($name === '') || ($email === '') ) {
 			$status = 'field_error';
 			echo $status;
 			return false;
@@ -27,9 +27,9 @@
 
 		$arEventFields = array(
 			"NAME"         => htmlspecialchars($name),
-			"PHONE"        => htmlspecialchars($phone),
+			// "PHONE"        => htmlspecialchars($phone),
 			"EMAIL"        => htmlspecialchars($email),
-			"COMMENT"      => htmlspecialchars($comment),
+			"MESSAGE"      => htmlspecialchars($message),
 		);
 
 		if(CEvent::SendImmediate($mail_template, SITE_ID, $arEventFields)){

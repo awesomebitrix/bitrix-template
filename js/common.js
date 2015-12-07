@@ -9,6 +9,25 @@ $(document).ready(function() {
 	// Находим ширину экрана
 	var screenWidth = $(document).width() + scrollWidth()
 
+/**
+***************************************************************
+* =USABILLITY
+***************************************************************
+**/
+
+
+// Перезагрузка капчи
+$('.captcha__refresh').on('click', function(e) {
+	e.preventDefault();
+	$('.captcha__img').attr('src', 'qucikCapthca/imagebuilder.php');
+});
+
+/* Вызов функции отправки почтового сообщения обратного звонка*/
+$('.modal__callback').on('submit', function(e) {
+	e.preventDefault();
+	sendCallbackEmail($(this));
+});
+
 
 /**
 ***************************************************************
@@ -17,7 +36,7 @@ $(document).ready(function() {
 **/
 
 // Функция определения плосы прокрутки
-	    function scrollWidth() {
+    function scrollWidth() {
 	    var div = $('<div>').css({
 	        position: "absolute",
 	        top: "0px",
@@ -40,54 +59,9 @@ $(document).ready(function() {
 
 	/**
 	***************************************************************
-	* =CALLBACK
-	***************************************************************
-	**/
-
-	// Выводим на экран форму заказа обратного звонка
-	$('.callback-trigger').on('click', function(e) {
-		e.preventDefault();
-		showCallback();
-	});
-
-	// Перезагрузка капчи
-	$('.captcha__refresh').on('click', function(e) {
-		e.preventDefault();
-		$('.captcha__img').attr('src', '/bitrix/templates/main/qucikCapthca/imagebuilder.php');
-	});
-
-	// Крестик: по нажатию закрываем форму
-	$('.callback__close').on('click', function() {
-		closeCallback();
-	});
-
-	/* Вызов функции отправки почтового сообщения обратного звонка*/
-	$('.callback').on('submit', function(e) {
-		e.preventDefault();
-		sendCallbackEmail($(this));
-	});
-
-	// закрытие маленького всплывающего окна
-	$('.confirm-order__btn').on('click', function() {
-		$('.confirm-order').fadeOut(400);
-	});
-
-	/**
-	***************************************************************
 	* =ФОРМА ОБРАТНОГО ЗВОНКА
 	***************************************************************
 	**/
-
-	// Функция вывода на экран формы заказа обратного звонка
-	function showCallback() {
-		$('.callback__error').text('');
-		$('.callback-form-wrapper').fadeIn(300);
-	}
-
-	// Функция для скрытия формы заказа обратного звонка
-	function closeCallback() {
-		$('.callback-form-wrapper').fadeOut(300);
-	}
 
 	// Функция отправки email-сообщения: Обратный звонок
 	function sendCallbackEmail(mailForm) {
@@ -98,14 +72,15 @@ $(document).ready(function() {
 			dataType: 'html',
 			success: function(status) {
 				if(status === 'field_error') {
-					$('.callback__error').text('Заполните обязательные поля!');
+					$('.modal__error').text('Заполните обязательные поля!');
 					return false;
 				} else if(status === 'captcha_error') {
-						$('.callback__error').text('Капча введена неверно!');
-						return false;
+					$('.modal__error').text('Капча введена неверно!');
+					return false;
 				} else {
-					closeCallback();
-					$('.confirm-order').delay(300).fadeIn();
+					// Close modal window
+					$('#myModal').modal('hide');
+					$('.modal-confirm').modal('show');
 				}
 			}
 		});

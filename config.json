@@ -134,11 +134,11 @@
     "@grid-gutter-width": "20px",
     "@grid-float-breakpoint": "@screen-sm-min",
     "@grid-float-breakpoint-max": "(@grid-float-breakpoint - 1)",
-    "@container-tablet": "90%",
+    "@container-tablet": "765px",
     "@container-sm": "@container-tablet",
-    "@container-desktop": "(950px + @grid-gutter-width)",
+    "@container-desktop": "(920px + @grid-gutter-width)",
     "@container-md": "@container-desktop",
-    "@container-large-desktop": "(1140px + @grid-gutter-width)",
+    "@container-large-desktop": "(1120px + @grid-gutter-width)",
     "@container-lg": "@container-large-desktop",
     "@navbar-height": "50px",
     "@navbar-margin-bottom": "@line-height-computed",
@@ -378,16 +378,26 @@
     "@blockquote-border-color": "@gray-lighter",
     "@page-header-border-color": "@gray-lighter",
     "@dl-horizontal-offset": "@component-offset-horizontal",
+    "@dl-horizontal-breakpoint": "@grid-float-breakpoint",
     "@hr-border": "@gray-lighter"
   },
   "css": [
-    "print.less",
     "grid.less",
     "forms.less",
-    "glyphicons.less",
+    "responsive-utilities.less",
     "navs.less",
-    "navbar.less"
+    "navbar.less",
+    "component-animations.less",
+    "dropdowns.less",
+    "tooltip.less",
+    "modals.less"
   ],
-  "js": [],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=6a7d700c8b2b538c7b0e"
+  "js": [
+    "dropdown.js",
+    "modal.js",
+    "tooltip.js",
+    "collapse.js",
+    "transition.js"
+  ],
+  "customizerUrl": "http://getbootstrap.com/customize/?id=9137204ef30d05f2fc05"
 }
